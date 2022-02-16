@@ -31,6 +31,15 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMovies();
+    this.getCurrentUser(this.user.Username);
+  }
+
+  getCurrentUser(username: string): void {
+    this.fetchApiData.getUser(username).subscribe((resp: any) => {
+      this.currentUser = resp;
+      this.currentFavs = resp.Favorites;
+      return (this.currentUser, this.currentFavs);
+    });
   }
 
   getMovies(): void {
@@ -41,7 +50,7 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  openDescriptionDialog(
+  openSynopsis(
     title: string,
     description: string,
   ): void {
@@ -84,6 +93,7 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+
   openProfile(): void {
     this.router.navigate(['profile']);
   }
@@ -91,6 +101,39 @@ export class MovieCardComponent implements OnInit {
   logOut(): void {
     this.router.navigate(['welcome']);
     localStorage.clear();
+  }
+
+  toggleFavs(movieId: string): void {
+    if (this.currentFavs.filter(function (e: any) { return e._id === movieId; }).length > 0) {
+      this.removeFromFavs(movieId);
+      this.isInFavs = false;
+    } else {
+      this.addToFavs(movieId)
+      this.isInFavs = true;
+    }
+  }
+
+  addToFavs(movieId: string): void {
+    //checking if the title is already in favs
+    if (this.currentFavs.filter(function (e: any) { return e._id === movieId; }).length > 0) {
+      this.snackBar.open('Already in your favs', 'OK', { duration: 2000 });
+      return
+    } else {
+      this.fetchApiData.addToFavs(this.user.Username, movieId).subscribe((resp: any) => {
+        this.getCurrentUser(this.user.Username);
+        this.ngOnInit();
+        this.snackBar.open('Added to favs', 'OK', { duration: 2000 });
+      });
+    }
+  }
+
+  removeFromFavs(movieId: string): void {
+    this.fetchApiData.removeFromFavs(this.user.Username, movieId).subscribe((resp: any) => {
+      this.snackBar.open('Removed from favs', 'OK', { duration: 2000 });
+      this.getCurrentUser(this.user.Username);
+      this.ngOnInit();
+      2000
+    });
   }
 
   favCheck(movieId: string): any {
