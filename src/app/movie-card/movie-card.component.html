@@ -1,0 +1,32 @@
+<header class="button">
+    <br>
+    <button (click)="openProfile()" mat-stroked-button color="primary">Profile</button>
+    <div class="divider"> </div>
+    <button (click)="logOut()" mat-stroked-button color="primary">Log out</button>
+</header>
+<br>
+<div class="movie-page">
+    <br>
+    <h1>Welcome, {{this.user.Username}}</h1>
+
+    <div style="display: flex;">
+        <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;">
+            <mat-card-header>
+                <mat-card-title>{{movie.Title}}</mat-card-title>
+                <mat-card-subtitle>Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+            </mat-card-header>
+            <img src={{movie.ImagePath}} alt={{movie.Title}} width="300" height="350" />
+            <mat-card-actions>
+                <button class="genre" mat-stroked-button
+                    (click)="openGenreDialog(movie.Genre.Name, movie.Genre.Description)" color="primary">Genre</button>
+                <button class="director" mat-stroked-button
+                    (click)="openDirectorDialog(movie.Director.Name, movie.Director.Bio, movie.Director.Birth, movie.Director.Death)"
+                    color="primary">Director</button>
+                <button class="description" mat-stroked-button
+                    (click)="openDescriptionDialog(movie.Title, movie.Description)" color="primary">Synopsis</button>
+                <mat-icon>
+                    favorite_border
+                </mat-icon>
+            </mat-card-actions>
+        </mat-card>
+    </div>
