@@ -1,0 +1,22 @@
+<mat-toolbar class="navbar">
+    <mat-list-item routerLinkActive="active current" class="secondary">
+        <a mat-stroked-button (click)="backToMovies()" color="primary"
+            style="margin-right: 10px; text-decoration: none;">
+            Movies
+        </a>
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active current" class="secondary">
+        <a mat-stroked-button (click)="openProfile()" color="primary"
+            style="margin-right: 10px; text-decoration: none;">
+            Profile
+        </a>
+    </mat-list-item>
+    <mat-list-item routerLinkActive="active current" class="secondary">
+        <a mat-stroked-button (click)="logOut()" color="primary" style="margin-right: 10px; text-decoration: none;">
+            Logout
+        </a>
+        <br>
+        <br>
+        <h1 class="welcome">Welcome, {{this.user.Username}}</h1>
+    </mat-list-item>
+</mat-toolbar>

@@ -26,6 +26,7 @@ import { DescriptionCardComponent } from './description-card/description-card.co
 import { ProfileViewComponent } from './profile-view/profile-view.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { RemoveUserComponent } from './remove-user/remove-user.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 
 
@@ -49,6 +50,7 @@ const appRoutes: Routes = [
     ProfileViewComponent,
     UserEditComponent,
     RemoveUserComponent,
+    NavBarComponent,
   ],
 
   imports: [
@@ -64,6 +66,7 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     FormsModule,
     MatIconModule,
+    MatToolbarModule,
     RouterModule.forRoot(appRoutes),
 
   ],

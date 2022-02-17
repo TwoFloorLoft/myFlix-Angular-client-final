@@ -29,7 +29,7 @@ export class UserLoginFormComponent implements OnInit {
       this.dialogRef.close();
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
-      this.snackBar.open('user logged in', 'OK', { duration: 2000 });
+      this.snackBar.open('User logged in successfully!', 'OK', { duration: 2000 });
       this.router.navigate(['movies']);
     }, (response) => {
       this.snackBar.open(response, 'OK', { duration: 2000 });
